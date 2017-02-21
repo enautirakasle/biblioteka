@@ -44,6 +44,11 @@ public class Libro_modelo extends Conector{
 		return null;
 	}
 	
+	/**
+	 * 
+	 * @param String autor nombre del autor
+	 * @return ArrayList<Libro> con los libros de ese autor
+	 */
 	ArrayList<Libro> selectLibrosDeAutor(String autor){
 		ArrayList<Libro> libros = new ArrayList<Libro>(); 
 		try {
