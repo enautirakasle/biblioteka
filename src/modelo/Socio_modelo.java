@@ -30,6 +30,11 @@ public class Socio_modelo extends Conector {
 		return socios;
 	}
 	
+	/**
+	 * 
+	 * @param int id de socio
+	 * @return el objeto Socio con la id que recibe
+	 */
 	public Socio select(int id){
 		PreparedStatement pst;
 		try {
