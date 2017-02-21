@@ -98,6 +98,10 @@ public class Libro_modelo extends Conector{
 		return 0;
 	}
 	
+	/**
+	 * 
+	 * @param int id_libro id hori duen liburua ezabatzen du datu basetik
+	 */
 	public void delete(int id_libro){
 		try {
 			Statement st = this.conexion.createStatement();
