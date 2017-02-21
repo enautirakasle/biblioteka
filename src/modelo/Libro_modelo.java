@@ -28,6 +28,38 @@ public class Libro_modelo extends Conector{
 		return libros;
 	}
 	
+	public Libro select(int id){
+		PreparedStatement pst;
+		try {
+			pst = this.conexion.prepareStatement("select * from libros where id =?");
+			pst.setInt(1, id);
+			ResultSet rs = pst.executeQuery();
+			rs.next();
+			return new Libro(rs.getInt("id"), rs.getString("titulo"), rs.getString("autor"), rs.getInt("num_pag"));
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return null;
+	}
+	
+	ArrayList<Libro> selectLibrosDeAutor(String autor){
+		ArrayList<Libro> libros = new ArrayList<Libro>(); 
+		try {
+			Statement st = this.conexion.createStatement();
+			ResultSet rs = st.executeQuery("select * from libros where autor='" + autor + "'");
+			while(rs.next()){
+				libros.add(new Libro(rs.getInt("id"), rs.getString("titulo"), rs.getString("autor"), rs.getInt("num_pag")));
+			}
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return libros;
+	}
+	
 	public void insert(Libro libro){
 		try {
 			PreparedStatement ps = this.conexion.prepareStatement("insert into libros (titulo, autor, num_pag) values(?,?,?)");
