@@ -12,11 +12,18 @@ public class Main {
 	public final static int INSERTAR_SOCIO = 2;
 	public final static int VER_LIBROS = 3;
 	public final static int VER_SOCIOS = 4;
+	public final static int VER_LIBRO = 5;
+	public final static int VER_SOCIO = 6;
+	public final static int DELETE_LIBRO = 7;
+	public final static int DELETE_SOCIO = 8;
+	public final static int LIBROS_DE_AUTOR = 9;
+	
 	public final static int SALIR = 0;
 	
 
 	public static void main(String[] args) {
 		// MAIN DE PRUEBA PARA LIBRO
+		int id;//para ver libro y socio, delete libro y socio
 
 		// Instanciar
 
@@ -32,6 +39,12 @@ public class Main {
 			System.out.println("2. Insertar socio");
 			System.out.println("3. Ver libros");
 			System.out.println("4. Ver socios");
+			System.out.println("5. Ver libro");
+			System.out.println("6. Ver socio");
+			System.out.println("7. Eliminar libro");
+			System.out.println("8. Eliminar socios");
+			System.out.println("9. Ver libros de autor");
+			
 			System.out.println("0. Salir del menú\n");
 			
 			opcion = Integer.parseInt(scan.nextLine());
@@ -85,6 +98,36 @@ public class Main {
 				while(is.hasNext()){
 					is.next().mostrarInfo();
 				}
+				break;
+				
+			case VER_LIBRO:
+				System.out.println("Introduce un id para ver libro:");
+				id = Integer.parseInt(scan.nextLine());
+				
+				lm.select(id).mostrarInfo();
+				break;
+			case VER_SOCIO:
+				System.out.println("Introduce un id para ver socio:");
+				id = Integer.parseInt(scan.nextLine());
+				
+				sm.select(id).mostrarInfo();
+				break;
+			case DELETE_LIBRO:
+				System.out.println("Introduce un id para eliminar libro:");
+				id = Integer.parseInt(scan.nextLine());
+				
+				lm.delete(id);
+				break;
+			case DELETE_SOCIO:
+				System.out.println("Introduce un id para eliminar socio:");
+				id = Integer.parseInt(scan.nextLine());
+				
+				lm.delete(id);
+				break;
+			case LIBROS_DE_AUTOR:
+				
+				//TODO hau egin behar da
+				
 				break;
 			case SALIR:
 				System.out.println("Saliendo....");
