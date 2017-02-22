@@ -49,7 +49,7 @@ public class Libro_modelo extends Conector{
 	 * @param String autor nombre del autor
 	 * @return ArrayList<Libro> con los libros de ese autor
 	 */
-	ArrayList<Libro> selectLibrosDeAutor(String autor){
+	public ArrayList<Libro> selectLibrosDeAutor(String autor){
 		ArrayList<Libro> libros = new ArrayList<Libro>(); 
 		try {
 			Statement st = this.conexion.createStatement();
