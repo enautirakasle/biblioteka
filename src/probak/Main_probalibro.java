@@ -5,7 +5,11 @@ import java.util.Iterator;
 
 import modelo.Libro;
 import modelo.Libro_modelo;
-
+/**
+ * 
+ * @author irakaslea probalibroren probak egiteko sortua
+ *
+ */
 public class Main_probalibro {
 
 	public static void main(String[] args) {
