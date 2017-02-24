@@ -7,6 +7,10 @@ public class Conector {
 	
 	protected Connection conexion;
 
+	/**
+	 * 
+	 * @param dbIzena datu basearen izena
+	 */
 	Conector(String dbIzena) {
 		
 			try {
