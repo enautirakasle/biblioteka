@@ -19,7 +19,7 @@ public class Prestamo_modelo extends Conector{
 			Statement st = this.conexion.createStatement();
 			ResultSet rs = st.executeQuery("select * from prestamos");
 			while(rs.next()){
-				prestamos.add(new Prestamo(rs.getInt("id_libro"),rs.getInt("id_socio"), rs.getDate("fecha"), rs.getBoolean("devuelto")));
+				prestamos.add(new Prestamo(rs.getInt("id_libro"),rs.getInt("id_socio"), new java.util.Date(rs.getDate("fecha").getTime()), rs.getBoolean("devuelto")));
 			}
 
 		} catch (SQLException e) {
@@ -40,8 +40,27 @@ public class Prestamo_modelo extends Conector{
 			pst.setDate(3, (java.sql.Date)fecha);
 			ResultSet rs = pst.executeQuery();
 			rs.next();
-			return new Prestamo(rs.getInt("id_libro"),rs.getInt("id_socio"), rs.getDate("fecha"), rs.getBoolean("devuelto"));
+			return new Prestamo(rs.getInt("id_libro"),rs.getInt("id_socio"), new java.util.Date(rs.getDate("fecha").getTime()), rs.getBoolean("devuelto"));
 			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return null;
+	}
+	
+	public ArrayList<Prestamo> prestamosDeSocio(int idSocio){
+		ArrayList<Prestamo> prestamos = new ArrayList<Prestamo>();
+		PreparedStatement pst;
+		try {
+			pst  = this.conexion.prepareStatement("select * from prestamos where id_socio = ?");
+			pst.setInt(1, idSocio);
+			ResultSet rs = pst.executeQuery();
+			
+			while(rs.next()){
+				prestamos.add(new Prestamo(rs.getInt("id_libro"),rs.getInt("id_socio"), new java.util.Date(rs.getDate("fecha").getTime()), rs.getBoolean("devuelto")));
+			}
+			return prestamos;
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
