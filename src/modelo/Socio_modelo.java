@@ -50,6 +50,22 @@ public class Socio_modelo extends Conector {
 		}
 		return null;
 	}
+	
+	public Socio selectSocioPorNombre(String nombre){
+		PreparedStatement pst;
+		try {
+			pst = this.conexion.prepareStatement("select * from socios where nombre =?");
+			pst.setString(1, nombre);
+			ResultSet rs = pst.executeQuery();
+			rs.next();
+			return new Socio(rs.getInt("id"), rs.getString("nombre"), rs.getString("apellido"),rs.getString("direccion"),rs.getString("poblacion"),rs.getString("provincia"),rs.getString("dni"));
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return null;
+	}
 
 	public void insert(Socio socio) {
 		Statement st;
