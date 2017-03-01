@@ -1,6 +1,7 @@
 package principal;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.Iterator;
 import java.util.Scanner;
 
@@ -17,6 +18,7 @@ public class Main {
 	public final static int DELETE_LIBRO = 7;
 	public final static int DELETE_SOCIO = 8;
 	public final static int LIBROS_DE_AUTOR = 9;
+	public final static int REALIZAR_PRESTAMO = 10;
 	
 	public final static int SALIR = 0;
 	
@@ -24,11 +26,14 @@ public class Main {
 	public static void main(String[] args) {
 		// MAIN DE PRUEBA PARA LIBRO
 		int id;//para ver libro y socio, delete libro y socio
+		ArrayList<Libro> libros;
+		Iterator<Libro> il;
 
 		// Instanciar
 
 		Libro_modelo lm = new Libro_modelo("biblioteka");
 		Socio_modelo sm = new Socio_modelo("biblioteka");
+		Prestamo_modelo pm = new Prestamo_modelo("biblioteka");
 		
 		Scanner scan = new Scanner(System.in);
 
@@ -44,6 +49,7 @@ public class Main {
 			System.out.println("7. Eliminar libro");
 			System.out.println("8. Eliminar socios");
 			System.out.println("9. Ver libros de autor");
+			System.out.println("10. Realizar prestamo");
 			
 			System.out.println("0. Salir del menú\n");
 			
@@ -83,8 +89,8 @@ public class Main {
 				break;
 
 			case VER_LIBROS: // VER LIBROS
-				ArrayList<Libro> libros = lm.select();
-				Iterator<Libro> il = libros.iterator();
+				libros = lm.select();
+				il = libros.iterator();
 				
 				while(il.hasNext()){
 					il.next().mostrarInfo();
@@ -126,8 +132,23 @@ public class Main {
 				break;
 			case LIBROS_DE_AUTOR:
 				
-				//TODO hau egin behar da
+				System.out.println("Introduce un autor: ");
+				autor = scan.nextLine();
+				libros = lm.selectLibrosDeAutor(autor);
+				il = libros.iterator();
+				while(il.hasNext()){
+					il.next().mostrarInfo();
+				}
 				
+				break;
+			case REALIZAR_PRESTAMO:
+				System.out.println("Introduce un id de socio:");
+				int id_socio = Integer.parseInt(scan.nextLine());
+				System.out.println("Introduce un id de libro:");
+				int id_libro = Integer.parseInt(scan.nextLine());
+				
+				pm.insert(new Prestamo(id_socio, id_libro, new Date(), false));
+				System.out.println("Prestamo realizado! socio: " + sm.select(id_socio).getNombre()+ ", libro: " + lm.select(id_libro).getTitulo());
 				break;
 			case SALIR:
 				System.out.println("Saliendo....");
