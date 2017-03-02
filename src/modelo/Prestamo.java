@@ -1,5 +1,6 @@
 package modelo;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class Prestamo {
@@ -54,9 +55,21 @@ public class Prestamo {
 		Libro_modelo lm = new Libro_modelo(bbdd);
 		
 		String nombre_libro = lm.select(this.id_libro).getTitulo();
+		
 		String nombre_socio = sm.select(this.id_socio).getNombre();
 		
-		System.out.println("Socio: " + nombre_socio + " - Libro: "+ nombre_libro + " - Fecha de prestamo: " + this.fecha + " - Devuelto: " + (this.devuelto?"si":"no"));
+		SimpleDateFormat formato = new SimpleDateFormat("yyyy-MM-dd");
+		
+		System.out.println("Socio: " + nombre_socio + " - Libro: "+ nombre_libro + " - Fecha de prestamo: " + formato.format(this.fecha) + " - Devuelto: " + (this.devuelto?"si":"no"));
+		
+		System.out.println("socio: " + nombre_socio);
+		System.out.println("Libro: " + nombre_libro);
+		System.out.println("Fecha prest: " + formato.format(this.fecha));
+		if(this.devuelto){
+			System.out.println("Devuelto: si");
+		}else{
+			System.out.println("Devuelto: no");
+		}
 		
 		
 	}

@@ -34,7 +34,6 @@ public class Main {
 		Socio socio;
 
 		// Instanciar
-
 		Libro_modelo lm = new Libro_modelo("biblioteka");
 		Socio_modelo sm = new Socio_modelo("biblioteka");
 		Prestamo_modelo pm = new Prestamo_modelo("biblioteka");
@@ -147,6 +146,7 @@ public class Main {
 				}
 				
 				break;
+				
 			case REALIZAR_PRESTAMO:
 				System.out.println("Introduce un id de socio:");
 				int id_socio = Integer.parseInt(scan.nextLine());
@@ -154,13 +154,16 @@ public class Main {
 				int id_libro = Integer.parseInt(scan.nextLine());
 				
 				pm.insert(new Prestamo(id_socio, id_libro, new Date(), false));
+				
 				System.out.println("Prestamo realizado! socio: " + sm.select(id_socio).getNombre()+ ", libro: " + lm.select(id_libro).getTitulo());
 				break;
+				
 			case VER_PRESTAMOS_DE_SOCIO:
 				System.out.println("Introduce un nombre de socio:");
 				String nombre_socio = scan.nextLine();
 				
 				socio = sm.selectSocioPorNombre(nombre_socio);
+				
 				prestamos = pm.prestamosDeSocio(socio.getId());
 				
 				Iterator<Prestamo> i = prestamos.iterator();
@@ -168,9 +171,10 @@ public class Main {
 					i.next().mostrarInfo();
 				}
 				break;
+				
 			case LIBROS_PRESTADOS:
 				System.out.println();
-				libros = lm.librosPrestados();
+				libros = lm.librosPrestados();//libros prestados
 				Iterator<Libro> iterator = libros.iterator();
 				while (iterator.hasNext()) {
 					Libro libro = iterator.next();
@@ -187,7 +191,6 @@ public class Main {
 
 				}
 				
-
 				break;
 			case SALIR:
 				System.out.println("Saliendo....");

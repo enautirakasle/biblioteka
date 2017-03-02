@@ -99,10 +99,15 @@ public class Prestamo_modelo extends Conector{
 			PreparedStatement ps = this.conexion.prepareStatement("insert into prestamos (id_libro, id_socio, fecha, devuelto) values(?,?,?,?)");
 			
 			ps.setInt(1, prestamo.getId_libro()); //lehen galdera ikurra bete
+			
 			ps.setInt(2, prestamo.getId_socio()); //bigarren galdera ikurra bete
-			java.sql.Date fecha = new java.sql.Date(prestamo.getFecha().getTime());
-			ps.setDate(3,  fecha); //hirugarren galdera ikurra
+			
+			long utilDateLong = prestamo.getFecha().getTime();
+			java.sql.Date sqlFecha = new java.sql.Date(utilDateLong);
+			ps.setDate(3,  sqlFecha); //hirugarren galdera ikurra
+			
 			ps.setBoolean(4, prestamo.isDevuelto());
+			
 			ps.execute();
 			
 		} catch (SQLException e) {
