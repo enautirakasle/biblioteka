@@ -19,6 +19,8 @@ public class Main {
 	public final static int DELETE_SOCIO = 8;
 	public final static int LIBROS_DE_AUTOR = 9;
 	public final static int REALIZAR_PRESTAMO = 10;
+	public final static int VER_PRESTAMOS_DE_SOCIO = 11;
+	public final static int LIBROS_PRESTADOS = 12;
 	
 	public final static int SALIR = 0;
 	
@@ -27,10 +29,11 @@ public class Main {
 		// MAIN DE PRUEBA PARA LIBRO
 		int id;//para ver libro y socio, delete libro y socio
 		ArrayList<Libro> libros;
+		ArrayList<Prestamo> prestamos;
 		Iterator<Libro> il;
+		Socio socio;
 
 		// Instanciar
-
 		Libro_modelo lm = new Libro_modelo("biblioteka");
 		Socio_modelo sm = new Socio_modelo("biblioteka");
 		Prestamo_modelo pm = new Prestamo_modelo("biblioteka");
@@ -50,6 +53,8 @@ public class Main {
 			System.out.println("8. Eliminar socios");
 			System.out.println("9. Ver libros de autor");
 			System.out.println("10. Realizar prestamo");
+			System.out.println("11. Ver prestamos de socio");
+			System.out.println("12. Ver libros prestados");
 			
 			System.out.println("0. Salir del menú\n");
 			
@@ -84,7 +89,7 @@ public class Main {
 				System.out.print("DNI:");
 				String dni = scan.nextLine();
 
-				Socio socio = new Socio(0,nombre,apellido,direccion,poblacion,provincia,dni);
+				socio = new Socio(0,nombre,apellido,direccion,poblacion,provincia,dni);
 				sm.insert(socio);
 				break;
 
@@ -141,6 +146,7 @@ public class Main {
 				}
 				
 				break;
+				
 			case REALIZAR_PRESTAMO:
 				System.out.println("Introduce un id de socio:");
 				int id_socio = Integer.parseInt(scan.nextLine());
@@ -148,7 +154,43 @@ public class Main {
 				int id_libro = Integer.parseInt(scan.nextLine());
 				
 				pm.insert(new Prestamo(id_socio, id_libro, new Date(), false));
+				
 				System.out.println("Prestamo realizado! socio: " + sm.select(id_socio).getNombre()+ ", libro: " + lm.select(id_libro).getTitulo());
+				break;
+				
+			case VER_PRESTAMOS_DE_SOCIO:
+				System.out.println("Introduce un nombre de socio:");
+				String nombre_socio = scan.nextLine();
+				
+				socio = sm.selectSocioPorNombre(nombre_socio);
+				
+				prestamos = pm.prestamosDeSocio(socio.getId());
+				
+				Iterator<Prestamo> i = prestamos.iterator();
+				while(i.hasNext()){
+					i.next().mostrarInfo();
+				}
+				break;
+				
+			case LIBROS_PRESTADOS:
+				System.out.println();
+				libros = lm.librosPrestados();//libros prestados
+				Iterator<Libro> iterator = libros.iterator();
+				while (iterator.hasNext()) {
+					Libro libro = iterator.next();
+					libro.mostrarInfo();
+					
+					prestamos = pm.prestamosNoDevueltos(libro.getId());
+					Iterator<Prestamo> iterator2 = prestamos.iterator();
+					while (iterator2.hasNext()) {
+						
+						iterator2.next().mostrarInfo();
+					}
+					System.out.println("---------------");
+					
+
+				}
+				
 				break;
 			case SALIR:
 				System.out.println("Saliendo....");

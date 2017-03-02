@@ -19,7 +19,7 @@ public class Prestamo_modelo extends Conector{
 			Statement st = this.conexion.createStatement();
 			ResultSet rs = st.executeQuery("select * from prestamos");
 			while(rs.next()){
-				prestamos.add(new Prestamo(rs.getInt("id_libro"),rs.getInt("id_socio"), rs.getDate("fecha"), rs.getBoolean("devuelto")));
+				prestamos.add(new Prestamo(rs.getInt("id_socio"),rs.getInt("id_libro"), new java.util.Date(rs.getDate("fecha").getTime()), rs.getBoolean("devuelto")));
 			}
 
 		} catch (SQLException e) {
@@ -40,7 +40,7 @@ public class Prestamo_modelo extends Conector{
 			pst.setDate(3, (java.sql.Date)fecha);
 			ResultSet rs = pst.executeQuery();
 			rs.next();
-			return new Prestamo(rs.getInt("id_libro"),rs.getInt("id_socio"), rs.getDate("fecha"), rs.getBoolean("devuelto"));
+			return new Prestamo(rs.getInt("id_socio"),rs.getInt("id_libro"), new java.util.Date(rs.getDate("fecha").getTime()), rs.getBoolean("devuelto"));
 			
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -49,6 +49,49 @@ public class Prestamo_modelo extends Conector{
 		return null;
 	}
 	
+	public ArrayList<Prestamo> prestamosNoDevueltos(int idLibro){
+		ArrayList<Prestamo> prestamos = new ArrayList<Prestamo>();
+		PreparedStatement pst;
+		try {
+			pst  = this.conexion.prepareStatement("select * from prestamos where id_libro = ? and devuelto = ?");
+			pst.setInt(1, idLibro);
+			pst.setBoolean(2, false);
+			ResultSet rs = pst.executeQuery();
+			
+			while(rs.next()){
+				prestamos.add(new Prestamo(rs.getInt("id_socio"),rs.getInt("id_libro"), new java.util.Date(rs.getDate("fecha").getTime()), rs.getBoolean("devuelto")));
+			}
+			return prestamos;
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return null;
+	}
+	
+	public ArrayList<Prestamo> prestamosDeSocio(int idSocio){
+		ArrayList<Prestamo> prestamos = new ArrayList<Prestamo>();
+		PreparedStatement pst;
+		try {
+			pst  = this.conexion.prepareStatement("select * from prestamos where id_socio = ?");
+			pst.setInt(1, idSocio);
+			ResultSet rs = pst.executeQuery();
+			
+			while(rs.next()){
+				prestamos.add(new Prestamo(rs.getInt("id_socio"),rs.getInt("id_libro"), new java.util.Date(rs.getDate("fecha").getTime()), rs.getBoolean("devuelto")));
+			}
+			return prestamos;
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return null;
+	}
+	/*
+	 * SELECT libros.titulo, socios.nombre, prestamos.fecha, prestamos.devuelto FROM libros RIGHT JOIN `prestamos` 
+	 * on libros.id = prestamos.id_libro LEFT JOIN socios on prestamos.id_socio = socios.id 
+	 */
+	
 	
 	
 	public void insert(Prestamo prestamo){
@@ -56,10 +99,15 @@ public class Prestamo_modelo extends Conector{
 			PreparedStatement ps = this.conexion.prepareStatement("insert into prestamos (id_libro, id_socio, fecha, devuelto) values(?,?,?,?)");
 			
 			ps.setInt(1, prestamo.getId_libro()); //lehen galdera ikurra bete
+			
 			ps.setInt(2, prestamo.getId_socio()); //bigarren galdera ikurra bete
-			java.sql.Date fecha = new java.sql.Date(prestamo.getFecha().getTime());
-			ps.setDate(3,  fecha); //hirugarren galdera ikurra
+			
+			long utilDateLong = prestamo.getFecha().getTime();
+			java.sql.Date sqlFecha = new java.sql.Date(utilDateLong);
+			ps.setDate(3,  sqlFecha); //hirugarren galdera ikurra
+			
 			ps.setBoolean(4, prestamo.isDevuelto());
+			
 			ps.execute();
 			
 		} catch (SQLException e) {
