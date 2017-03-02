@@ -20,6 +20,7 @@ public class Main {
 	public final static int LIBROS_DE_AUTOR = 9;
 	public final static int REALIZAR_PRESTAMO = 10;
 	public final static int VER_PRESTAMOS_DE_SOCIO = 11;
+	public final static int LIBROS_PRESTADOS = 12;
 	
 	public final static int SALIR = 0;
 	
@@ -28,6 +29,7 @@ public class Main {
 		// MAIN DE PRUEBA PARA LIBRO
 		int id;//para ver libro y socio, delete libro y socio
 		ArrayList<Libro> libros;
+		ArrayList<Prestamo> prestamos;
 		Iterator<Libro> il;
 		Socio socio;
 
@@ -53,6 +55,7 @@ public class Main {
 			System.out.println("9. Ver libros de autor");
 			System.out.println("10. Realizar prestamo");
 			System.out.println("11. Ver prestamos de socio");
+			System.out.println("12. Ver libros prestados");
 			
 			System.out.println("0. Salir del menú\n");
 			
@@ -158,12 +161,33 @@ public class Main {
 				String nombre_socio = scan.nextLine();
 				
 				socio = sm.selectSocioPorNombre(nombre_socio);
-				ArrayList<Prestamo> prestamos = pm.prestamosDeSocio(socio.getId());
+				prestamos = pm.prestamosDeSocio(socio.getId());
 				
 				Iterator<Prestamo> i = prestamos.iterator();
 				while(i.hasNext()){
 					i.next().mostrarInfo();
 				}
+				break;
+			case LIBROS_PRESTADOS:
+				System.out.println();
+				libros = lm.librosPrestados();
+				Iterator<Libro> iterator = libros.iterator();
+				while (iterator.hasNext()) {
+					Libro libro = iterator.next();
+					libro.mostrarInfo();
+					
+					prestamos = pm.prestamosNoDevueltos(libro.getId());
+					Iterator<Prestamo> iterator2 = prestamos.iterator();
+					while (iterator2.hasNext()) {
+						
+						iterator2.next().mostrarInfo();
+					}
+					System.out.println("---------------");
+					
+
+				}
+				
+
 				break;
 			case SALIR:
 				System.out.println("Saliendo....");

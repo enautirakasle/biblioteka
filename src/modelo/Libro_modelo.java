@@ -65,6 +65,26 @@ public class Libro_modelo extends Conector{
 		return libros;
 	}
 	
+	public ArrayList<Libro> librosPrestados(){
+		ArrayList<Libro> libros = new ArrayList<Libro>();
+		String query = "SELECT libros.* from libros where id in (select DISTINCT prestamos.id_libro from prestamos where prestamos.devuelto = 0)";
+		Statement st;
+		try {
+			st = this.conexion.createStatement();
+			ResultSet rs = st.executeQuery(query);
+			
+			while(rs.next()){
+				libros.add(new Libro(rs.getInt("id"), rs.getString("titulo"), rs.getString("autor"), rs.getInt("num_pag")));
+			}
+			
+			return libros;
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return libros;
+	}
+	
 	public void insert(Libro libro){
 		try {
 			PreparedStatement ps = this.conexion.prepareStatement("insert into libros (titulo, autor, num_pag) values(?,?,?)");

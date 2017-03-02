@@ -49,6 +49,26 @@ public class Prestamo_modelo extends Conector{
 		return null;
 	}
 	
+	public ArrayList<Prestamo> prestamosNoDevueltos(int idLibro){
+		ArrayList<Prestamo> prestamos = new ArrayList<Prestamo>();
+		PreparedStatement pst;
+		try {
+			pst  = this.conexion.prepareStatement("select * from prestamos where id_libro = ? and devuelto = ?");
+			pst.setInt(1, idLibro);
+			pst.setBoolean(2, false);
+			ResultSet rs = pst.executeQuery();
+			
+			while(rs.next()){
+				prestamos.add(new Prestamo(rs.getInt("id_socio"),rs.getInt("id_libro"), new java.util.Date(rs.getDate("fecha").getTime()), rs.getBoolean("devuelto")));
+			}
+			return prestamos;
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return null;
+	}
+	
 	public ArrayList<Prestamo> prestamosDeSocio(int idSocio){
 		ArrayList<Prestamo> prestamos = new ArrayList<Prestamo>();
 		PreparedStatement pst;
@@ -67,6 +87,10 @@ public class Prestamo_modelo extends Conector{
 		}
 		return null;
 	}
+	/*
+	 * SELECT libros.titulo, socios.nombre, prestamos.fecha, prestamos.devuelto FROM libros RIGHT JOIN `prestamos` 
+	 * on libros.id = prestamos.id_libro LEFT JOIN socios on prestamos.id_socio = socios.id 
+	 */
 	
 	
 	
