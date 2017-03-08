@@ -30,6 +30,11 @@ public class Socio {
 				+ " provincia: " + this.provincia
 				+ " dni: " + this.dni);
 	}
+	
+	public Object getInfo() {
+		return "id: " + this.id
+				+ " nombre: " + this.nombre + this.apellido	+ " dni: " + this.dni;
+	}
 
 	public int getId() {
 		return id;
@@ -86,6 +91,8 @@ public class Socio {
 	public void setDni(String dni) {
 		this.dni = dni;
 	}
+
+
 	
 	
 
