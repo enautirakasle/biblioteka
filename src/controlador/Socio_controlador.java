@@ -22,7 +22,9 @@ public class Socio_controlador {
 		socio.setDni(dni);
 		
 		this.socio_modelo.insert(socio);
-		
-		
+	}
+	
+	public void deleteSocio(int id){
+		this.socio_modelo.delete(id);
 	}
 }
