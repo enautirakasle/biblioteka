@@ -10,6 +10,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
+import controlador.Socio_controlador;
 import modelo.Socio;
 import modelo.Socio_modelo;
 
@@ -34,41 +35,20 @@ public class Socio_ventana extends JDialog {
 	 */
 	public Socio_ventana(JFrame padre, boolean modal) {
 		super(padre, modal);
-		addWindowFocusListener(new WindowFocusListener() {
-			public void windowGainedFocus(WindowEvent arg0) {
-				System.out.println("focus gained");
-			}
-			public void windowLostFocus(WindowEvent arg0) {
-			}
-		});
-		addComponentListener(new ComponentAdapter() {
-			@Override
-			public void componentShown(ComponentEvent arg0) {
-				System.out.println("shown");
-			}
-		});
-		setBounds(100, 100, 450, 300);
-		DefaultListModel defaultListModel = new DefaultListModel();
 		
-		Socio_modelo sm = new Socio_modelo("biblioteka");
-		ArrayList<Socio> socios = sm.select();
-		Iterator<Socio> i = socios.iterator();
-		while(i.hasNext()){
-			defaultListModel.addElement(i.next().getInfo());
-		}
+		setBounds(100, 100, 450, 300);
 		getContentPane().setLayout(new BorderLayout(0, 0));
 		
 		list = new JList();
 		list.setLayoutOrientation(JList.HORIZONTAL_WRAP);
 		getContentPane().add(list, BorderLayout.CENTER);
 		
-		list.setModel(defaultListModel);
-		
 		JButton btnCrearSocio = new JButton("Crear Socio");
 		getContentPane().add(btnCrearSocio, BorderLayout.SOUTH);
 		btnCrearSocio.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				abrirCrearSocioVentana();
+				Socio_controlador socio_controlador = new Socio_controlador();
+				socio_controlador.abrirFormCrearSocio();
 			}
 		});
 //		{
@@ -89,18 +69,24 @@ public class Socio_ventana extends JDialog {
 //		}
 	}
 
-
-
-	protected void abrirCrearSocioVentana() {
-		CrearSocio_ventana cs_v = new CrearSocio_ventana(this, true);
-		cs_v.setVisible(true);
-		
-	}
-
+	//nire metdodoak
 	public void addSocio(String nombre, String apellido, String direccion, String poblacion, String provincia, String dni) {
 		DefaultListModel dlm = (DefaultListModel) this.list.getModel();
 		dlm.addElement(nombre + " "+apellido + " din: " +  dni);
 		list.setModel(dlm);
+	}
+
+	public void rellenarLista(ArrayList<Socio> socios) {	
+		//TODO para Borja, se rellena aqui la lista o se le pasa al controlador
+		DefaultListModel defaultListModel = new DefaultListModel();
+		Iterator<Socio> i = socios.iterator();
+		while(i.hasNext()){
+			Socio socio = i.next();
+			defaultListModel.addElement(socio.getNombre() + " " + socio.getApellido() + " dni: " + socio.getDni());
+		}
+		list.setModel(defaultListModel);
+		//-----------------para Borja
+		
 	}
 
 }

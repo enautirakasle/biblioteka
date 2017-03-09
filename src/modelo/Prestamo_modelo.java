@@ -9,7 +9,7 @@ import java.util.Date;
 
 public class Prestamo_modelo extends Conector{
 
-	public Prestamo_modelo(String dbIzena) {
+	public Prestamo_modelo() {
 		super();
 	}
 	

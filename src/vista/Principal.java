@@ -1,18 +1,18 @@
 package vista;
 
-import java.awt.BorderLayout;
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
+import controlador.Socio_controlador;
+
 import javax.swing.JButton;
 import javax.swing.SwingConstants;
-import java.awt.CardLayout;
 import java.awt.FlowLayout;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
-import javax.swing.JTextField;
 
 public class Principal extends JFrame {
 
@@ -48,10 +48,9 @@ public class Principal extends JFrame {
 		JButton btnGestionSocios = new JButton("Gestion socios");
 		btnGestionSocios.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				abrirSocioVentana();
+				Socio_controlador socioControlador = new Socio_controlador();
+				socioControlador.abrirSocioVentana();
 			}
-
-			
 		});
 		contentPane.add(btnGestionSocios);
 		
@@ -61,12 +60,6 @@ public class Principal extends JFrame {
 		
 		JButton btnGestionPrestamos = new JButton("Gestion prestamos");
 		contentPane.add(btnGestionPrestamos);
-	}
-	
-	
-	private void abrirSocioVentana() {
-		Socio_ventana sv = new Socio_ventana(this, true);
-		sv.setVisible(true);
 	}
 
 }

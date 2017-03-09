@@ -10,7 +10,7 @@ public class Main_probasocio {
 
 	public static void main(String[] args) {
 		//modeloa instantziatu
-		Socio_modelo sm = new Socio_modelo("biblioteka");
+		Socio_modelo sm = new Socio_modelo();
 		
 		//select proba
 		ArrayList<Socio> socios = sm.select();

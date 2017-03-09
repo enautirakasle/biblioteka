@@ -10,7 +10,7 @@ public class Main_probaprestamo {
 
 	public static void main(String[] args) {
 		
-		Prestamo_modelo pm = new Prestamo_modelo("biblioteka");
+		Prestamo_modelo pm = new Prestamo_modelo();
 		
 		ArrayList<Prestamo> prestamos = pm.select();
 		Iterator<Prestamo> i = prestamos.iterator();

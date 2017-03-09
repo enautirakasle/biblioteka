@@ -14,7 +14,7 @@ public class Main_probalibro {
 
 	public static void main(String[] args) {
 		//modeloa instantziatu
-		Libro_modelo lm = new Libro_modelo("biblioteka");
+		Libro_modelo lm = new Libro_modelo();
 		
 		//select proba
 		ArrayList<Libro> libros = lm.select();
