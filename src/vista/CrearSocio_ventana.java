@@ -8,6 +8,7 @@ import javax.swing.JDialog;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
+import controlador.Socio_controlador;
 import modelo.Socio;
 import modelo.Socio_modelo;
 
@@ -74,16 +75,11 @@ public class CrearSocio_ventana extends JDialog {
 		JButton btnGuardar = new JButton("Guardar");
 		btnGuardar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				Socio_controlador sc= new Socio_controlador();
 				
-				Socio socio = new Socio(0, textNombre.getText(), textApellido.getText(), textDireccion.getText(), textPoblacion.getText(), textProvincia.getText(), textDni.getText());
-				Socio_modelo sm = new Socio_modelo("biblioteka");
-				sm.insert(socio);
+				sc.insertarSocio(textNombre.getText(), textApellido.getText(), textDireccion.getText(), textPoblacion.getText(), textProvincia.getText(), textDni.getText());
+				
 				dispose();
-				
-				
-				
-				
-				
 			}
 		});
 		

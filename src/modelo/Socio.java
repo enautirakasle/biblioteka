@@ -21,6 +21,9 @@ public class Socio {
 		this.dni = dni;
 	}
 	
+	public Socio() {
+	}
+
 	public void mostrarInfo(){
 		System.out.println("id: " + this.id
 				+ " nombre: " + this.nombre
