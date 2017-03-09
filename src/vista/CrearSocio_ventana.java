@@ -78,7 +78,8 @@ public class CrearSocio_ventana extends JDialog {
 				Socio socio = new Socio(0, textNombre.getText(), textApellido.getText(), textDireccion.getText(), textPoblacion.getText(), textProvincia.getText(), textDni.getText());
 				Socio_modelo sm = new Socio_modelo("biblioteka");
 				sm.insert(socio);
-				cerrarVentana();
+				dispose();
+				
 				
 				
 				
@@ -159,8 +160,5 @@ public class CrearSocio_ventana extends JDialog {
 		contentPanel.setLayout(gl_contentPanel);
 	}
 
-	protected void cerrarVentana() {
-		this.dispose();
-		
-	}
+
 }
