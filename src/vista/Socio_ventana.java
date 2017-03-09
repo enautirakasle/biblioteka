@@ -18,10 +18,14 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.awt.event.ActionEvent;
 import javax.swing.JList;
+import javax.swing.BoxLayout;
+import java.awt.event.ComponentAdapter;
+import java.awt.event.ComponentEvent;
+import java.awt.event.WindowFocusListener;
+import java.awt.event.WindowEvent;
 
 public class Socio_ventana extends JDialog {
-
-	private final JPanel contentPanel = new JPanel();
+	private JList list;
 
 
 
@@ -30,22 +34,20 @@ public class Socio_ventana extends JDialog {
 	 */
 	public Socio_ventana(JFrame padre, boolean modal) {
 		super(padre, modal);
-		setBounds(100, 100, 450, 300);
-		getContentPane().setLayout(new BorderLayout());
-		contentPanel.setLayout(new FlowLayout());
-		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
-		getContentPane().add(contentPanel, BorderLayout.CENTER);
-		
-		JButton btnCrearSocio = new JButton("Crear Socio");
-		btnCrearSocio.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				abrirCrearSocioVentana();
+		addWindowFocusListener(new WindowFocusListener() {
+			public void windowGainedFocus(WindowEvent arg0) {
+				System.out.println("focus gained");
+			}
+			public void windowLostFocus(WindowEvent arg0) {
 			}
 		});
-		
-		JList list = new JList();
-		contentPanel.add(list);
-		contentPanel.add(btnCrearSocio);
+		addComponentListener(new ComponentAdapter() {
+			@Override
+			public void componentShown(ComponentEvent arg0) {
+				System.out.println("shown");
+			}
+		});
+		setBounds(100, 100, 450, 300);
 		DefaultListModel defaultListModel = new DefaultListModel();
 		
 		Socio_modelo sm = new Socio_modelo("biblioteka");
@@ -54,8 +56,21 @@ public class Socio_ventana extends JDialog {
 		while(i.hasNext()){
 			defaultListModel.addElement(i.next().getInfo());
 		}
+		getContentPane().setLayout(new BorderLayout(0, 0));
+		
+		list = new JList();
+		list.setLayoutOrientation(JList.HORIZONTAL_WRAP);
+		getContentPane().add(list, BorderLayout.CENTER);
 		
 		list.setModel(defaultListModel);
+		
+		JButton btnCrearSocio = new JButton("Crear Socio");
+		getContentPane().add(btnCrearSocio, BorderLayout.SOUTH);
+		btnCrearSocio.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				abrirCrearSocioVentana();
+			}
+		});
 //		{
 //			JPanel buttonPane = new JPanel();
 //			buttonPane.setLayout(new FlowLayout(FlowLayout.RIGHT));
@@ -80,6 +95,12 @@ public class Socio_ventana extends JDialog {
 		CrearSocio_ventana cs_v = new CrearSocio_ventana(this, true);
 		cs_v.setVisible(true);
 		
+	}
+
+	public void addSocio(String nombre, String apellido, String direccion, String poblacion, String provincia, String dni) {
+		DefaultListModel dlm = (DefaultListModel) this.list.getModel();
+		dlm.addElement(nombre + " "+apellido + " din: " +  dni);
+		list.setModel(dlm);
 	}
 
 }

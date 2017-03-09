@@ -79,6 +79,7 @@ public class CrearSocio_ventana extends JDialog {
 				
 				sc.insertarSocio(textNombre.getText(), textApellido.getText(), textDireccion.getText(), textPoblacion.getText(), textProvincia.getText(), textDni.getText());
 				
+				((Socio_ventana) getParent()).addSocio(textNombre.getText(), textApellido.getText(), textDireccion.getText(), textPoblacion.getText(), textProvincia.getText(), textDni.getText());
 				dispose();
 			}
 		});
