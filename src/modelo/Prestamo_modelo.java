@@ -10,7 +10,7 @@ import java.util.Date;
 public class Prestamo_modelo extends Conector{
 
 	public Prestamo_modelo(String dbIzena) {
-		super(dbIzena);
+		super();
 	}
 	
 	public ArrayList <Prestamo> select(){

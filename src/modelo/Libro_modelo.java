@@ -9,7 +9,7 @@ import java.util.ArrayList;
 public class Libro_modelo extends Conector{
 
 	public Libro_modelo(String dbIzena) {
-		super(dbIzena);
+		super();
 	}
 	
 	public ArrayList <Libro> select(){
@@ -22,7 +22,6 @@ public class Libro_modelo extends Conector{
 			}
 			
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return libros;
@@ -38,7 +37,6 @@ public class Libro_modelo extends Conector{
 			return new Libro(rs.getInt("id"), rs.getString("titulo"), rs.getString("autor"), rs.getInt("num_pag"));
 			
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return null;
@@ -59,7 +57,6 @@ public class Libro_modelo extends Conector{
 			}
 			
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return libros;
@@ -99,7 +96,6 @@ public class Libro_modelo extends Conector{
 //			st.execute("INSERT INTO `libros`(`titulo`, `autor`, `num_pag`) VALUES ('" + libro.getTitulo()+"', '" +libro.getAutor()+"','"+libro.getNum_pag()+ "')");
 			
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
@@ -117,7 +113,6 @@ public class Libro_modelo extends Conector{
 			
 			return ps.executeUpdate();
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return 0;
@@ -132,7 +127,6 @@ public class Libro_modelo extends Conector{
 			Statement st = this.conexion.createStatement();
 			st.execute("delete from libros where id=" + id_libro);
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		
