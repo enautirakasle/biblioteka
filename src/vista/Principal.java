@@ -6,6 +6,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
+import controlador.LibroControlador;
 import controlador.Socio_controlador;
 
 import javax.swing.JButton;
@@ -55,6 +56,12 @@ public class Principal extends JFrame {
 		contentPane.add(btnGestionSocios);
 		
 		JButton btnGestionLibros = new JButton("Gestion Libros");
+		btnGestionLibros.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				LibroControlador libroControlador = new LibroControlador();
+				libroControlador.abrirLibroVentana();
+			}
+		});
 		btnGestionLibros.setVerticalAlignment(SwingConstants.TOP);
 		contentPane.add(btnGestionLibros);
 		
