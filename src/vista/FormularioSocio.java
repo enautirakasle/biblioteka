@@ -8,7 +8,7 @@ import javax.swing.JDialog;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
-import controlador.Socio_controlador;
+import controlador.SocioControlador;
 import modelo.Socio;
 import modelo.Socio_modelo;
 
@@ -20,7 +20,7 @@ import javax.swing.JTextField;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
-public class CrearSocio_ventana extends JDialog {
+public class FormularioSocio extends JDialog {
 
 	private final JPanel contentPanel = new JPanel();
 	private JLabel lblNombre;
@@ -34,7 +34,7 @@ public class CrearSocio_ventana extends JDialog {
 	/**
 	 * Create the dialog.
 	 */
-	public CrearSocio_ventana(JDialog padre, boolean modal) {
+	public FormularioSocio(JDialog padre, boolean modal) {
 		super(padre, modal);
 		setBounds(100, 100, 450, 300);
 		getContentPane().setLayout(new BorderLayout());
@@ -75,11 +75,11 @@ public class CrearSocio_ventana extends JDialog {
 		JButton btnGuardar = new JButton("Guardar");
 		btnGuardar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				Socio_controlador sc= new Socio_controlador();
+				SocioControlador sc= new SocioControlador();
 				
 				sc.insertarSocio(textNombre.getText(), textApellido.getText(), textDireccion.getText(), textPoblacion.getText(), textProvincia.getText(), textDni.getText());
 				
-				((Socio_ventana) getParent()).addSocio(textNombre.getText(), textApellido.getText(), textDireccion.getText(), textPoblacion.getText(), textProvincia.getText(), textDni.getText());
+				((SocioVentana) getParent()).addSocio(textNombre.getText(), textApellido.getText(), textDireccion.getText(), textPoblacion.getText(), textProvincia.getText(), textDni.getText());
 				dispose();
 			}
 		});

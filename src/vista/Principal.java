@@ -7,7 +7,7 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
 import controlador.LibroControlador;
-import controlador.Socio_controlador;
+import controlador.SocioControlador;
 
 import javax.swing.JButton;
 import javax.swing.SwingConstants;
@@ -49,7 +49,7 @@ public class Principal extends JFrame {
 		JButton btnGestionSocios = new JButton("Gestion socios");
 		btnGestionSocios.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				Socio_controlador socioControlador = new Socio_controlador();
+				SocioControlador socioControlador = new SocioControlador();
 				socioControlador.abrirSocioVentana();
 			}
 		});

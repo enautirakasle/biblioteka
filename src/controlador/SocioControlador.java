@@ -2,28 +2,28 @@ package controlador;
 
 import modelo.Socio;
 import modelo.Socio_modelo;
-import vista.CrearSocio_ventana;
+import vista.FormularioSocio;
 import vista.Principal;
-import vista.Socio_ventana;
+import vista.SocioVentana;
 
-public class Socio_controlador {
+public class SocioControlador {
 
 	private Socio_modelo socio_modelo;
-	private Socio_ventana socio_ventana;
+	private SocioVentana socioVentana;
 	private Principal principal;
-	private CrearSocio_ventana crearSocio_ventana;
+	private FormularioSocio crearSocio_ventana;
 
-	public Socio_controlador() {
+	public SocioControlador() {
 		socio_modelo = new Socio_modelo();
 		this.principal = new Principal();
-		this.socio_ventana = new Socio_ventana(principal, true);
-		this.crearSocio_ventana = new CrearSocio_ventana(socio_ventana, true);
+		this.socioVentana = new SocioVentana(principal, true);
+		this.crearSocio_ventana = new FormularioSocio(socioVentana, true);
 	}
 
 	public void abrirSocioVentana() {
-		this.socio_ventana.rellenarLista(this.socio_modelo.select());
+		this.socioVentana.rellenarLista(this.socio_modelo.select());
 		
-		this.socio_ventana.setVisible(true);
+		this.socioVentana.setVisible(true);
 	}
 	
 	public void abrirFormCrearSocio(){

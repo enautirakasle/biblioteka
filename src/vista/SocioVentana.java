@@ -10,7 +10,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
-import controlador.Socio_controlador;
+import controlador.SocioControlador;
 import modelo.Socio;
 import modelo.Socio_modelo;
 
@@ -25,7 +25,7 @@ import java.awt.event.ComponentEvent;
 import java.awt.event.WindowFocusListener;
 import java.awt.event.WindowEvent;
 
-public class Socio_ventana extends JDialog {
+public class SocioVentana extends JDialog {
 	private JList list;
 
 
@@ -33,7 +33,7 @@ public class Socio_ventana extends JDialog {
 	/**
 	 * Create the dialog.
 	 */
-	public Socio_ventana(JFrame padre, boolean modal) {
+	public SocioVentana(JFrame padre, boolean modal) {
 		super(padre, modal);
 		
 		setBounds(100, 100, 450, 300);
@@ -47,7 +47,7 @@ public class Socio_ventana extends JDialog {
 		getContentPane().add(btnCrearSocio, BorderLayout.SOUTH);
 		btnCrearSocio.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				Socio_controlador socio_controlador = new Socio_controlador();
+				SocioControlador socio_controlador = new SocioControlador();
 				socio_controlador.abrirFormCrearSocio();
 			}
 		});
