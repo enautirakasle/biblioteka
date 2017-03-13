@@ -1,33 +1,33 @@
 package controlador;
 
 import modelo.Socio;
-import modelo.Socio_modelo;
+import modelo.SocioModelo;
 import vista.FormularioSocio;
 import vista.Principal;
 import vista.SocioVentana;
 
 public class SocioControlador {
 
-	private Socio_modelo socio_modelo;
+	private SocioModelo socioModelo;
 	private SocioVentana socioVentana;
 	private Principal principal;
-	private FormularioSocio crearSocio_ventana;
+	private FormularioSocio formularioSocio;
 
 	public SocioControlador() {
-		socio_modelo = new Socio_modelo();
+		socioModelo = new SocioModelo();
 		this.principal = new Principal();
 		this.socioVentana = new SocioVentana(principal, true);
-		this.crearSocio_ventana = new FormularioSocio(socioVentana, true);
+		this.formularioSocio = new FormularioSocio(socioVentana, true);
 	}
 
 	public void abrirSocioVentana() {
-		this.socioVentana.rellenarLista(this.socio_modelo.select());
+		this.socioVentana.rellenarLista(this.socioModelo.select());
 		
 		this.socioVentana.setVisible(true);
 	}
 	
 	public void abrirFormCrearSocio(){
-		this.crearSocio_ventana.setVisible(true);
+		this.formularioSocio.setVisible(true);
 	}
 
 	public void insertarSocio(String nombre, String apellido, String direccion, String poblacion, String provincia,
@@ -42,13 +42,13 @@ public class SocioControlador {
 		socio.setProvincia(provincia);
 		socio.setDni(dni);
 
-		this.socio_modelo.insert(socio);
+		this.socioModelo.insert(socio);
 
-		this.crearSocio_ventana.dispose();
+		this.formularioSocio.dispose();
 	}
 
 	public void deleteSocio(int id) {
-		this.socio_modelo.delete(id);
+		this.socioModelo.delete(id);
 	}
 
 }

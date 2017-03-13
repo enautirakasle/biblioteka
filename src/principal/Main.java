@@ -34,9 +34,9 @@ public class Main {
 		Socio socio;
 
 		// Instanciar
-		Libro_modelo lm = new Libro_modelo();
-		Socio_modelo sm = new Socio_modelo();
-		Prestamo_modelo pm = new Prestamo_modelo();
+		LibroModelo lm = new LibroModelo();
+		SocioModelo sm = new SocioModelo();
+		PrestamoModelo pm = new PrestamoModelo();
 		
 		Scanner scan = new Scanner(System.in);
 

@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 
 import modelo.Libro;
-import modelo.Libro_modelo;
+import modelo.LibroModelo;
 /**
  * 
  * @author irakaslea probalibroren probak egiteko sortua
@@ -14,7 +14,7 @@ public class Main_probalibro {
 
 	public static void main(String[] args) {
 		//modeloa instantziatu
-		Libro_modelo lm = new Libro_modelo();
+		LibroModelo lm = new LibroModelo();
 		
 		//select proba
 		ArrayList<Libro> libros = lm.select();

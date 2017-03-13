@@ -12,7 +12,7 @@ import javax.swing.border.EmptyBorder;
 
 import controlador.SocioControlador;
 import modelo.Socio;
-import modelo.Socio_modelo;
+import modelo.SocioModelo;
 
 import java.awt.event.ActionListener;
 import java.util.ArrayList;

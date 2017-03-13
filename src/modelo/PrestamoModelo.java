@@ -7,9 +7,9 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Date;
 
-public class Prestamo_modelo extends Conector{
+public class PrestamoModelo extends Conector{
 
-	public Prestamo_modelo() {
+	public PrestamoModelo() {
 		super();
 	}
 	
