@@ -1,5 +1,6 @@
 package controlador;
 
+import modelo.Libro;
 import modelo.LibroModelo;
 import vista.FormularioLibro;
 import vista.LibroVentana;
@@ -22,5 +23,16 @@ public class LibroControlador {
 
 	public void abrirLibroVentana() {
 		this.libroVentana.setVisible(true);
+	}
+
+	public void abrirFormularioLibro() {
+		this.formularioLibro.setVisible(true);
+		
+	}
+
+	public void insertar(String titulo, String autor, String num_pag) {
+		Libro libro = new Libro(0, titulo, autor, Integer.parseInt(num_pag));
+		this.libroModelo.insert(libro);
+//		this.formularioLibro.dispose();
 	}
 }
