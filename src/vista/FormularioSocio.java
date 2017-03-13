@@ -30,6 +30,8 @@ public class FormularioSocio extends JDialog {
 	private JTextField textPoblacion;
 	private JTextField textProvincia;
 	private JTextField textDni;
+	
+	private SocioControlador socioControlador;
 
 	/**
 	 * Create the dialog.
@@ -75,9 +77,9 @@ public class FormularioSocio extends JDialog {
 		JButton btnGuardar = new JButton("Guardar");
 		btnGuardar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				SocioControlador sc= new SocioControlador();
+				socioControlador = new SocioControlador();
 				
-				sc.insertarSocio(textNombre.getText(), textApellido.getText(), textDireccion.getText(), textPoblacion.getText(), textProvincia.getText(), textDni.getText());
+				socioControlador.insertarSocio(textNombre.getText(), textApellido.getText(), textDireccion.getText(), textPoblacion.getText(), textProvincia.getText(), textDni.getText());
 				
 				((SocioVentana) getParent()).addSocio(textNombre.getText(), textApellido.getText(), textDireccion.getText(), textPoblacion.getText(), textProvincia.getText(), textDni.getText());
 				dispose();

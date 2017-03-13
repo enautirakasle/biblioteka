@@ -94,7 +94,7 @@ public class FormularioLibro extends JDialog {
 					public void actionPerformed(ActionEvent e) {
 						LibroControlador libroControlador = new LibroControlador();
 						libroControlador.insertar(textFieldTitulo.getText(), textFieldAutor.getText(), textFieldNumPag.getText());
-						dispose();
+						//dispose();
 					}
 				});
 				okButton.setActionCommand("OK");

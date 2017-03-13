@@ -8,6 +8,7 @@ import vista.Principal;
 
 public class LibroControlador {
 	private LibroModelo libroModelo;
+	
 	private LibroVentana libroVentana;
 	private FormularioLibro formularioLibro;
 	private Principal principal;
@@ -26,13 +27,16 @@ public class LibroControlador {
 	}
 
 	public void abrirFormularioLibro() {
+		System.out.println(this.formularioLibro);
 		this.formularioLibro.setVisible(true);
-		
 	}
 
 	public void insertar(String titulo, String autor, String num_pag) {
 		Libro libro = new Libro(0, titulo, autor, Integer.parseInt(num_pag));
+		//System.out.println(this.formularioLibro);
 		this.libroModelo.insert(libro);
-//		this.formularioLibro.dispose();
+		this.formularioLibro.dispose();
+		
+		
 	}
 }

@@ -71,6 +71,7 @@ public class SocioVentana extends JDialog {
 
 	//nire metdodoak
 	public void addSocio(String nombre, String apellido, String direccion, String poblacion, String provincia, String dni) {
+		//TODO errorea konpontzeko dago
 		DefaultListModel dlm = (DefaultListModel) this.list.getModel();
 		dlm.addElement(nombre + " "+apellido + " din: " +  dni);
 		list.setModel(dlm);
