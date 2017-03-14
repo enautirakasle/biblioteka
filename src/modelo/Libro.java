@@ -52,6 +52,4 @@ public class Libro {
 	public void setNum_pag(int num_pag) {
 		this.num_pag = num_pag;
 	}
-	
-	
 }

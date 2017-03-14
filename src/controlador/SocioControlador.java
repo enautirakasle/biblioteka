@@ -43,8 +43,6 @@ public class SocioControlador {
 		socio.setDni(dni);
 
 		this.socioModelo.insert(socio);
-
-		this.formularioSocio.dispose();
 	}
 
 	public void deleteSocio(int id) {
